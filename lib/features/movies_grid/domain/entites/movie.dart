@@ -9,25 +9,24 @@ class Movie extends Equatable {
   final String posterUrl;
   final int budget;
   final int runningTime;
-  final DateTime releaseData;
+  final DateTime releaseDate;
   final List<Actor> actors;
   final List<String>? gallaryImagesUrl;
   final int? revenue;
 
   Movie(
-    this.name,
-    this.plot,
-    this.genres,
-    this.rating,
-    this.director,
-    this.posterUrl,
-    this.budget,
-    this.runningTime,
-    this.releaseData,
-    this.actors, {
-    this.gallaryImagesUrl,
-    this.revenue,
-  });
+      this.name,
+      this.plot,
+      this.genres,
+      this.rating,
+      this.director,
+      this.posterUrl,
+      this.budget,
+      this.runningTime,
+      this.releaseDate,
+      this.actors,
+      {this.gallaryImagesUrl,
+      this.revenue});
 
   @override
   List<Object?> get props => [
@@ -39,10 +38,10 @@ class Movie extends Equatable {
         posterUrl,
         budget,
         runningTime,
-        releaseData,
+        releaseDate,
         actors,
         gallaryImagesUrl,
-        revenue,
+        revenue
       ];
 }
 
@@ -51,11 +50,7 @@ class Actor extends Equatable {
   final String characterName;
   final String? imageUrl;
 
-  Actor(
-    this.name,
-    this.characterName, {
-    this.imageUrl,
-  });
+  Actor(this.name, this.characterName, {this.imageUrl});
 
   @override
   List<Object?> get props => [name, characterName, imageUrl];

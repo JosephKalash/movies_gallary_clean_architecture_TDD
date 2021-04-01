@@ -10,8 +10,8 @@ import '../../../../core/shared_mocks.mocks.dart';
 
 @GenerateMocks([MovieRepository])
 void main() {
-  var mockRepository = MockMovieRepository();
-  var usecase = GetMovies(mockRepository);
+  final mockRepository = MockMovieRepository();
+  final usecase = GetMovies(mockRepository);
 
   final List<Movie> movies = [];
 

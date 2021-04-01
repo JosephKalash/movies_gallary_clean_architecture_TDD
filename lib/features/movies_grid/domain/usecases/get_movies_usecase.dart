@@ -13,3 +13,5 @@ class GetMovies extends Usecase {
     return await movieRepository.getMovies();
   }
 }
+
+
