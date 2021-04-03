@@ -3,10 +3,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:movies_gallery/features/movies_grid/domain/entites/movie.dart';
-import 'package:movies_gallery/features/movies_grid/domain/repositories/movie_repository.dart';
+import 'package:movies_gallery/features/movies_grid/domain/repositories/movies_repository.dart';
 import 'package:movies_gallery/features/movies_grid/domain/usecases/get_movies_usecase.dart';
-import '../../../../core/shared_mocks.mocks.dart';
-
+import './get_movies_usecase_test.mocks.dart';
 
 @GenerateMocks([MovieRepository])
 void main() {

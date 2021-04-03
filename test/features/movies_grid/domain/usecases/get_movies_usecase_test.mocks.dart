@@ -9,7 +9,7 @@ import 'package:mockito/mockito.dart' as _i1;
 import 'package:movies_gallery/core/error/failures.dart' as _i5;
 import 'package:movies_gallery/features/movies_grid/domain/entites/movie.dart'
     as _i6;
-import 'package:movies_gallery/features/movies_grid/domain/repositories/movie_repository.dart'
+import 'package:movies_gallery/features/movies_grid/domain/repositories/movies_repository.dart'
     as _i3;
 
 // ignore_for_file: comment_references
