@@ -6,32 +6,18 @@ void main() {
 
   final tMovie = MovieModel(
     'name',
-    'plot',
-    ['genres'],
-    3.3,
-    'director',
+    'overview',
+    23.3,
     'posterUrl',
-    234,
-    1244,
     date,
-    [ActorModel('name', 'characterName', 'imageUrl')],
-    ['gallary'],
-    33,
   );
 
   final tMovieJson = {
-    'name': 'name',
-    'plot': 'plot',
-    'genres': ['genres'],
-    'rating': 3.3,
-    'director': 'director',
-    'posterUrl': 'posterUrl',
-    'budget': 234,
-    'runningTime': 1244,
-    'releaseDate': date.toIso8601String(),
-    'actors': [ActorModel('name', 'characterName', 'imageUrl').toJson()],
-    'gallaryImagesUrl': ['gallary'],
-    'revenue': 33,
+    'title': 'name',
+    'overview': 'overview',
+    'vote_average': 23.3,
+    'poster_path': 'posterUrl',
+    'release_date': date.toIso8601String(),
   };
   test(
     'should construct movie object from json correctly',
@@ -42,14 +28,4 @@ void main() {
       expect(result, equals(tMovie));
     },
   );
-    test(
-    'should encode movie object correctly',
-    () {
-      //act
-      final result = tMovie.toJson();
-      //assert
-      expect(result, equals(tMovieJson));
-    },
-  );
-
 }

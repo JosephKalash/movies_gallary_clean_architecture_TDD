@@ -1,47 +1,77 @@
 import 'package:equatable/equatable.dart';
 
 class Movie extends Equatable {
-  final String name;
-  final String plot;
-  final List<String> genres;
-  final double rating;
-  final String director;
+  final String title;
+  final String overview;
+  final double voteAverage;
   final String posterUrl;
-  final int budget;
-  final int runningTime;
   final DateTime releaseDate;
-  final List<Actor> actors;
+
+  final List<String>? genres;
+  final List<Actor>? actors;
+  final int? runTime;
+  final int? budget;
   final List<String>? gallaryImagesUrl;
   final int? revenue;
+  final String? director;
+
+  set genres(List<String>? genres) {
+    this.genres = genres;
+  }
+
+  set budget(int? budget) {
+    this.budget = budget;
+  }
+
+  set runTime(int? runTime) {
+    this.runTime = runTime;
+  }
+
+  set revenue(int? revenue) {
+    this.revenue = revenue;
+  }
+
+  set actors(List<Actor>? actors) {
+    this.actors = actors;
+  }
+
+  set director(String? director) {
+    this.director = director;
+  }
+
+  set gallaryImagesUrl(List<String>? gallaryImagesUrl) {
+    this.gallaryImagesUrl = gallaryImagesUrl;
+  }
 
   Movie(
-      this.name,
-      this.plot,
-      this.genres,
-      this.rating,
-      this.director,
-      this.posterUrl,
-      this.budget,
-      this.runningTime,
-      this.releaseDate,
-      this.actors,
-      {this.gallaryImagesUrl,
-      this.revenue});
+    this.title,
+    this.overview,
+    this.voteAverage,
+    this.posterUrl,
+    this.releaseDate, {
+    this.genres,
+    this.runTime,
+    this.actors,
+    this.budget,
+    this.gallaryImagesUrl,
+    this.revenue,
+    this.director,
+  });
 
   @override
   List<Object?> get props => [
-        name,
-        plot,
+        title,
+        overview,
         genres,
-        rating,
-        director,
+        voteAverage,
         posterUrl,
         budget,
-        runningTime,
+        runTime,
         releaseDate,
         actors,
         gallaryImagesUrl,
-        revenue
+        revenue,
+        director,
       ];
 }
 
@@ -50,8 +80,16 @@ class Actor extends Equatable {
   final String characterName;
   final String? imageUrl;
 
-  Actor(this.name, this.characterName, {this.imageUrl});
+  Actor(
+    this.name,
+    this.characterName, {
+    this.imageUrl,
+  });
 
   @override
-  List<Object?> get props => [name, characterName, imageUrl];
+  List<Object?> get props => [
+        name,
+        characterName,
+        imageUrl,
+      ];
 }

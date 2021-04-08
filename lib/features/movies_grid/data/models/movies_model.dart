@@ -1,3 +1,5 @@
+import 'package:movies_gallery/core/constans.dart';
+
 import '../../domain/entites/movie.dart';
 
 class ActorModel extends Actor {
@@ -15,27 +17,52 @@ class ActorModel extends Actor {
 
 class MovieModel extends Movie {
   MovieModel(
-    String name,
-    String plot,
-    List<String> genres,
-    double rating,
-    String director,
+    String title,
+    String overview,
+    double voteAverage,
     String posterUrl,
-    int budget,
-    int runningTime,
-    DateTime releaseDate,
-    List<ActorModel> actors,
-    List<String>? gallaryImagesUrl,
-    int? revenue,
-  ) : super(name, plot, genres, rating, director, posterUrl, budget,
-            runningTime, releaseDate, actors,
-            gallaryImagesUrl: gallaryImagesUrl, revenue: revenue);
+     DateTime releaseDate,
+     // {
+    //List<String> genres,
+    // int? runTime,
+    // List<ActorModel>? actors,
+    // int? budget,
+    // List<String>? gallaryImagesUrl,
+    // int? revenue,
+    // String? director,}
+  ) : super(
+          title,
+          overview,
+          voteAverage,
+          posterUrl,
+          releaseDate,
+          //genres,
+          // runTime: runTime,
+          // actors: actors,
+          // budget: budget,
+          // gallaryImagesUrl: gallaryImagesUrl,
+          // revenue: revenue,
+          // director: director,
+        );
 
   factory MovieModel.fromJson(Map<String, dynamic> json) =>
       _$MovieModelFromJson(json);
-
-  Map<String, dynamic> toJson() => _$MovieModelToJson(this);
 }
+
+MovieModel _$MovieModelFromJson(Map<String, dynamic> json) {
+  return MovieModel(
+    json['title'] as String,
+    json['overview'] as String,
+    (json['vote_average'] as num).toDouble(),
+    json['poster_path'] as String,
+    DateTime.parse(json['release_date'] as String),
+  );
+}
+
+_buildImagesUrl(String path) {
+  const MOVIE_API = 'https://api.themoviedb.org/3/movie/{movie_id}/images?api_key=$API_KEY&language=en-US';
+}
+
 ActorModel _$ActorModelFromJson(Map<String, dynamic> json) {
   return ActorModel(
     json['name'] as String,
@@ -51,40 +78,13 @@ Map<String, dynamic> _$ActorModelToJson(ActorModel instance) =>
       'imageUrl': instance.imageUrl,
     };
 
-
-MovieModel _$MovieModelFromJson(Map<String, dynamic> json) {
-  return MovieModel(
-    json['name'] as String,
-    json['plot'] as String,
-    (json['genres'] as List<dynamic>).map((e) => e as String).toList(),
-    (json['rating'] as num).toDouble(),
-    json['director'] as String,
-    json['posterUrl'] as String,
-    json['budget'] as int,
-    json['runningTime'] as int,
-    DateTime.parse(json['releaseDate'] as String),
-    (json['actors'] as List<dynamic>)
-        .map((e) => ActorModel.fromJson(e))
-        .toList(),
-    (json['gallaryImagesUrl'] as List<dynamic>?)
-        ?.map((e) => e as String)
-        .toList(),
-    json['revenue'] as int?,
-  );
-}
-
-Map<String, dynamic> _$MovieModelToJson(MovieModel instance) =>
-    <String, dynamic>{
-      'name': instance.name,
-      'plot': instance.plot,
-      'genres': instance.genres,
-      'rating': instance.rating,
-      'director': instance.director,
-      'posterUrl': instance.posterUrl,
-      'budget': instance.budget,
-      'runningTime': instance.runningTime,
-      'releaseDate': instance.releaseDate.toIso8601String(),
-      'actors': instance.actors.map((e) => (e as ActorModel).toJson()).toList(),
-      'gallaryImagesUrl': instance.gallaryImagesUrl,
-      'revenue': instance.revenue,
-    };
+// (json['genres'] as List<dynamic>)
+//         .map((e) => (e['name'] as String))
+//         .toList(),
+// runTime: json['runtime'] as int?,
+// actors: ((json['actors'] as List<dynamic>?)
+//     ?.map((e) => ActorModel.fromJson(e))
+//     .toList()),
+// budget: json['budget'] as int?,
+// revenue: json['revenue'] as int?,
+// director: json['director'] as String?,
