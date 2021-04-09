@@ -16,6 +16,7 @@ void main() {
   final response = {
     "results": [
       {
+        "genre_ids": [28, 878],
         "overview":
             "In a time when monsters walk the Earth, humanity’s fight for its future sets Godzilla and Kong on a collision course that will see the two most powerful forces of nature on the planet collide in a spectacular battle for the ages.",
         "poster_path": "/pgqgaUx1cJb5oZQQ5v0tNARCeBp.jpg",
@@ -29,6 +30,7 @@ void main() {
   final movies = <MovieModel>[
     MovieModel.fromJson(
       {
+        "genre_ids": [28, 878],
         "overview":
             "In a time when monsters walk the Earth, humanity’s fight for its future sets Godzilla and Kong on a collision course that will see the two most powerful forces of nature on the planet collide in a spectacular battle for the ages.",
         "poster_path": "/pgqgaUx1cJb5oZQQ5v0tNARCeBp.jpg",

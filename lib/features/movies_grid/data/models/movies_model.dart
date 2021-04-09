@@ -21,29 +21,9 @@ class MovieModel extends Movie {
     String overview,
     double voteAverage,
     String posterUrl,
-     DateTime releaseDate,
-     // {
-    //List<String> genres,
-    // int? runTime,
-    // List<ActorModel>? actors,
-    // int? budget,
-    // List<String>? gallaryImagesUrl,
-    // int? revenue,
-    // String? director,}
-  ) : super(
-          title,
-          overview,
-          voteAverage,
-          posterUrl,
-          releaseDate,
-          //genres,
-          // runTime: runTime,
-          // actors: actors,
-          // budget: budget,
-          // gallaryImagesUrl: gallaryImagesUrl,
-          // revenue: revenue,
-          // director: director,
-        );
+    DateTime releaseDate,
+    List<String> genres,
+  ) : super(title, overview, voteAverage, posterUrl, releaseDate);
 
   factory MovieModel.fromJson(Map<String, dynamic> json) =>
       _$MovieModelFromJson(json);
@@ -56,11 +36,25 @@ MovieModel _$MovieModelFromJson(Map<String, dynamic> json) {
     (json['vote_average'] as num).toDouble(),
     json['poster_path'] as String,
     DateTime.parse(json['release_date'] as String),
+    _getGenresName(json['genre_ids'] as List<int>),
   );
 }
 
+List<String> _getGenresName(List<int> data) {
+  final list = <String>[];
+  for (int number in data) {
+    for (var map in GENRES)
+      if (map['id'] == number) {
+        list.add(map['name'] as String);
+        break;
+      }
+  }
+  return list;
+}
+
 _buildImagesUrl(String path) {
-  const MOVIE_API = 'https://api.themoviedb.org/3/movie/{movie_id}/images?api_key=$API_KEY&language=en-US';
+  const MOVIE_API =
+      'https://api.themoviedb.org/3/movie/550/images?api_key=$API_KEY&language=en-US';
 }
 
 ActorModel _$ActorModelFromJson(Map<String, dynamic> json) {

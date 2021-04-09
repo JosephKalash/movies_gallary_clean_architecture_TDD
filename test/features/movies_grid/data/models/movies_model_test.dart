@@ -10,11 +10,13 @@ void main() {
     23.3,
     'posterUrl',
     date,
+    ['Action','Crime']
   );
 
   final tMovieJson = {
     'title': 'name',
     'overview': 'overview',
+    "genre_ids": [28, 80],
     'vote_average': 23.3,
     'poster_path': 'posterUrl',
     'release_date': date.toIso8601String(),

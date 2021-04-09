@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:movies_gallery/core/constans.dart';
-import 'package:movies_gallery/core/error/excpetions.dart';
-import 'dart:convert';
+
+import '../../../../core/constans.dart';
+import '../../../../core/error/excpetions.dart';
 import '../models/movies_model.dart';
 
 abstract class RemoteDS {
