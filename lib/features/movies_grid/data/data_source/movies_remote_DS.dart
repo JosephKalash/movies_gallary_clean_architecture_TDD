@@ -16,18 +16,21 @@ class RemoteDSImpl extends RemoteDS {
   @override
   Future<List<MovieModel>> fetchMovies() async {
     final url = 'http://api.themoviedb.org/3/discover/movie';
-    final response = await dio.get(url, queryParameters: {
-      'api_key': API_KEY,
-      'page': 1,
-    },);
+    final response = await dio.get(
+      url,
+      queryParameters: {
+        'api_key': API_KEY,
+        'page': 1,
+      },
+    );
     if (response.statusCode == 200) {
-      return _returnMoviesFromDataa(response);
+      return _returnMoviesFromResponse(response);
     } else {
       throw ServerExcpetion();
     }
   }
 
-  List<MovieModel> _returnMoviesFromDataa(Response<dynamic> response) {
+  List<MovieModel> _returnMoviesFromResponse(Response<dynamic> response) {
     final data = response.data;
     final result = data['results'] as List<dynamic>;
     final movies = result.map((e) => MovieModel.fromJson(e)).toList();

@@ -23,7 +23,7 @@ class MovieModel extends Movie {
     String posterUrl,
     DateTime releaseDate,
     List<String> genres,
-  ) : super(title, overview, voteAverage, posterUrl, releaseDate);
+  ) : super(title, overview, voteAverage, posterUrl, releaseDate, genres);
 
   factory MovieModel.fromJson(Map<String, dynamic> json) =>
       _$MovieModelFromJson(json);
@@ -34,15 +34,19 @@ MovieModel _$MovieModelFromJson(Map<String, dynamic> json) {
     json['title'] as String,
     json['overview'] as String,
     (json['vote_average'] as num).toDouble(),
-    json['poster_path'] as String,
+    _getPosterUrl(json['poster_path'] as String),
     DateTime.parse(json['release_date'] as String),
-    _getGenresName(json['genre_ids'] as List<int>),
+    _getGenresName(
+      (json['genre_ids'] as List<dynamic>).map((e) => e as int).toList(),
+    ),
   );
 }
 
+String _getPosterUrl(String path) => '$IMAGE_API$path';
+
 List<String> _getGenresName(List<int> data) {
   final list = <String>[];
-  for (int number in data) {
+  for (var number in data) {
     for (var map in GENRES)
       if (map['id'] == number) {
         list.add(map['name'] as String);
@@ -71,14 +75,3 @@ Map<String, dynamic> _$ActorModelToJson(ActorModel instance) =>
       'characterName': instance.characterName,
       'imageUrl': instance.imageUrl,
     };
-
-// (json['genres'] as List<dynamic>)
-//         .map((e) => (e['name'] as String))
-//         .toList(),
-// runTime: json['runtime'] as int?,
-// actors: ((json['actors'] as List<dynamic>?)
-//     ?.map((e) => ActorModel.fromJson(e))
-//     .toList()),
-// budget: json['budget'] as int?,
-// revenue: json['revenue'] as int?,
-// director: json['director'] as String?,

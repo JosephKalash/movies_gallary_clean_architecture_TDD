@@ -48,8 +48,8 @@ class Movie extends Equatable {
     this.overview,
     this.voteAverage,
     this.posterUrl,
-    this.releaseDate, {
-    this.genres,
+    this.releaseDate,
+    this.genres,{
     this.runTime,
     this.actors,
     this.budget,
