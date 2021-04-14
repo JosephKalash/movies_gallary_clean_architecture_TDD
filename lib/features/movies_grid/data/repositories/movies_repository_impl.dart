@@ -26,4 +26,9 @@ class MoviesRepositoryImpl extends MovieRepository {
       return Left(InternetFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, Movie>> getMovieDetails(int id) {
+    throw UnimplementedError();
+  }
 }

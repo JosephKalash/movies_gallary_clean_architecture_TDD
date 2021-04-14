@@ -38,7 +38,7 @@ class MockRemoteDS extends _i1.Mock implements _i4.RemoteDS {
 
   @override
   _i3.Future<List<_i5.MovieModel>> fetchPopularityMovies() =>
-      (super.noSuchMethod(Invocation.method(#fetchMovies, []),
+      (super.noSuchMethod(Invocation.method(#fetchPopularityMovies, []),
               returnValue: Future.value(<_i5.MovieModel>[]))
           as _i3.Future<List<_i5.MovieModel>>);
 }
