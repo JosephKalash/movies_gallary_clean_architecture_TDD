@@ -17,7 +17,7 @@ class MoviesRepositoryImpl extends MovieRepository {
   Future<Either<Failure, List<Movie>>> getMovies() async {
     if (await internetInfo.isConnect) {
       try {
-        final movies = await remoteDS.fetchMovies();
+        final movies = await remoteDS.fetchPopularityMovies();
         return Right(movies);
       } on ServerExcpetion {
         return Left(ServerFailure());

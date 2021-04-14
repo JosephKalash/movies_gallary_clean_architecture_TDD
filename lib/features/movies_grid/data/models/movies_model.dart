@@ -17,13 +17,14 @@ class ActorModel extends Actor {
 
 class MovieModel extends Movie {
   MovieModel(
+    int id,
     String title,
     String overview,
     double voteAverage,
-    String posterUrl,
+    String? posterUrl,
     DateTime releaseDate,
     List<String> genres,
-  ) : super(title, overview, voteAverage, posterUrl, releaseDate, genres);
+  ) : super(id, title, overview, voteAverage, posterUrl, releaseDate, genres);
 
   factory MovieModel.fromJson(Map<String, dynamic> json) =>
       _$MovieModelFromJson(json);
@@ -31,10 +32,11 @@ class MovieModel extends Movie {
 
 MovieModel _$MovieModelFromJson(Map<String, dynamic> json) {
   return MovieModel(
+    json['id'] as int,
     json['title'] as String,
     json['overview'] as String,
     (json['vote_average'] as num).toDouble(),
-    _getPosterUrl(json['poster_path'] as String),
+    _getPosterUrl(json['poster_path'] as String?),
     DateTime.parse(json['release_date'] as String),
     _getGenresName(
       (json['genre_ids'] as List<dynamic>).map((e) => e as int).toList(),
@@ -42,7 +44,10 @@ MovieModel _$MovieModelFromJson(Map<String, dynamic> json) {
   );
 }
 
-String _getPosterUrl(String path) => '$IMAGE_API$path';
+String? _getPosterUrl(String? path) {
+  if (path == null) return null;
+  return '$IMAGE_API$path';
+}
 
 List<String> _getGenresName(List<int> data) {
   final list = <String>[];

@@ -16,6 +16,7 @@ void main() {
   final response = {
     "results": [
       {
+        "id": 1,
         "genre_ids": [28, 878],
         "overview":
             "In a time when monsters walk the Earth, humanity’s fight for its future sets Godzilla and Kong on a collision course that will see the two most powerful forces of nature on the planet collide in a spectacular battle for the ages.",
@@ -30,6 +31,7 @@ void main() {
   final movies = <MovieModel>[
     MovieModel.fromJson(
       {
+        "id": 1,
         "genre_ids": [28, 878],
         "overview":
             "In a time when monsters walk the Earth, humanity’s fight for its future sets Godzilla and Kong on a collision course that will see the two most powerful forces of nature on the planet collide in a spectacular battle for the ages.",
@@ -72,13 +74,17 @@ void main() {
           //arrange
           _setupDioGetSuccess();
           //act
-          await remoteDS.fetchMovies();
+          await remoteDS.fetchPopularityMovies();
           //assert
           final url = 'http://api.themoviedb.org/3/discover/movie';
           verify(
             mockDio.get(url, queryParameters: {
               'api_key': API_KEY,
               'page': 1,
+              'language': 'en-US',
+              'include_adult': false,
+              'include_video': false,
+              'sort_by': 'popularity.desc',
             }),
           );
         },
@@ -89,7 +95,7 @@ void main() {
           //arrange
           _setupDioGetSuccess();
           //act
-          final result = await remoteDS.fetchMovies();
+          final result = await remoteDS.fetchPopularityMovies();
           //assert
 
           expect(result, movies);
@@ -101,7 +107,7 @@ void main() {
           //arrange
           _setupDioGetFail();
           //act
-          final call = remoteDS.fetchMovies;
+          final call = remoteDS.fetchPopularityMovies;
           //assert
           expect(() => call(), throwsA(isInstanceOf<ServerExcpetion>()));
         },

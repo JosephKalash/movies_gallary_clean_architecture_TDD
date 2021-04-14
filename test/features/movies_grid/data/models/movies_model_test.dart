@@ -5,15 +5,17 @@ void main() {
   final date = DateTime.now();
 
   final tMovie = MovieModel(
+    1,
     'name',
     'overview',
     23.3,
-    'posterUrl',
+    'https://image.tmdb.org/t/p/w200/posterUrl',
     date,
     ['Action','Crime']
   );
 
   final tMovieJson = {
+    'id': 1,
     'title': 'name',
     'overview': 'overview',
     "genre_ids": [28, 80],

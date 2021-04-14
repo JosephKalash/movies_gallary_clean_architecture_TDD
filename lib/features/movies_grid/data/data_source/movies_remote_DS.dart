@@ -5,7 +5,7 @@ import '../../../../core/error/excpetions.dart';
 import '../models/movies_model.dart';
 
 abstract class RemoteDS {
-  Future<List<MovieModel>> fetchMovies();
+  Future<List<MovieModel>> fetchPopularityMovies();
 }
 
 class RemoteDSImpl extends RemoteDS {
@@ -13,14 +13,18 @@ class RemoteDSImpl extends RemoteDS {
 
   RemoteDSImpl(this.dio);
 
+  final url = 'http://api.themoviedb.org/3/discover/movie';
   @override
-  Future<List<MovieModel>> fetchMovies() async {
-    final url = 'http://api.themoviedb.org/3/discover/movie';
+  Future<List<MovieModel>> fetchPopularityMovies() async {
     final response = await dio.get(
       url,
       queryParameters: {
         'api_key': API_KEY,
         'page': 1,
+        'language': 'en-US',
+        'include_adult': false,
+        'include_video': false,
+        'sort_by': 'popularity.desc',
       },
     );
     if (response.statusCode == 200) {

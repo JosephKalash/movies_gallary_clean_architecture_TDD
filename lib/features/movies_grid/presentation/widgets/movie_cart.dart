@@ -28,7 +28,10 @@ class MovieCart extends StatelessWidget {
               ],
             ),
           ),
-          child: Image.network(movie.posterUrl),
+          child: Image.network(
+            movie.posterUrl!,
+            errorBuilder: (_, _a, _b) => Text('There is no poster'),
+          ),
           footer: ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: GridTileBar(
@@ -41,7 +44,7 @@ class MovieCart extends StatelessWidget {
                 ),
               ),
               subtitle: Text(
-                '${movie.genres![0]} | ${movie.genres![1]}',
+                '${movie.genres[0]} | ${movie.genres[1]}',
               ),
             ),
           ),

@@ -42,11 +42,11 @@ void main() {
         'should return list of movieModel when call to server success',
         () async {
           //arrange
-          when(mockRemoteDS.fetchMovies()).thenAnswer((_) async => tMovies);
+          when(mockRemoteDS.fetchPopularityMovies()).thenAnswer((_) async => tMovies);
           //act
           final result = await repositoryImpl.getMovies();
           //assert
-          verify(mockRemoteDS.fetchMovies());
+          verify(mockRemoteDS.fetchPopularityMovies());
           expect(result, equals(Right(tMovies)));
         },
       );
@@ -54,7 +54,7 @@ void main() {
         'should return ServerFailure when remoteDS throw an execption',
         ()async {
           //arrange
-          when(mockRemoteDS.fetchMovies()).thenThrow(ServerExcpetion());
+          when(mockRemoteDS.fetchPopularityMovies()).thenThrow(ServerExcpetion());
           //act
           final result = await repositoryImpl.getMovies();
           //assert
