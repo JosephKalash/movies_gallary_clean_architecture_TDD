@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 
 import '../../../../core/constans.dart';
 import '../../../../core/error/excpetions.dart';
-import '../models/movies_model.dart';
+import '../models/movie_model.dart';
 
 abstract class RemoteDS {
   Future<List<MovieModel>> fetchPopularityMovies();
@@ -14,6 +14,8 @@ class RemoteDSImpl extends RemoteDS {
   RemoteDSImpl(this.dio);
 
   final url = 'http://api.themoviedb.org/3/discover/movie';
+//https://api.themoviedb.org/3/movie/$id?api_key=$API_KEY&append_to_response=images
+
   @override
   Future<List<MovieModel>> fetchPopularityMovies() async {
     final response = await dio.get(

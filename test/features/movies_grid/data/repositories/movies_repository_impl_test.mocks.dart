@@ -8,7 +8,7 @@ import 'package:mockito/mockito.dart' as _i1;
 import 'package:movies_gallery/core/network/internet_info.dart' as _i2;
 import 'package:movies_gallery/features/movies_grid/data/data_source/movies_remote_DS.dart'
     as _i4;
-import 'package:movies_gallery/features/movies_grid/data/models/movies_model.dart'
+import 'package:movies_gallery/features/movies_grid/data/models/movie_model.dart'
     as _i5;
 
 // ignore_for_file: comment_references

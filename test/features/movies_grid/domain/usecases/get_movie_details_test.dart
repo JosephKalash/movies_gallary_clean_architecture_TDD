@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:movies_gallery/features/movies_grid/data/models/movies_model.dart';
+import 'package:movies_gallery/features/movies_grid/data/models/movie_model.dart';
 import 'package:movies_gallery/features/movies_grid/domain/entites/movie.dart';
 import 'package:movies_gallery/features/movies_grid/domain/repositories/movies_repository.dart';
 import 'package:movies_gallery/features/movies_grid/domain/usecases/get_movie_details.dart';

@@ -5,7 +5,7 @@ import 'package:mockito/mockito.dart';
 import 'package:movies_gallery/core/constans.dart';
 import 'package:movies_gallery/core/error/excpetions.dart';
 import 'package:movies_gallery/features/movies_grid/data/data_source/movies_remote_DS.dart';
-import 'package:movies_gallery/features/movies_grid/data/models/movies_model.dart';
+import 'package:movies_gallery/features/movies_grid/data/models/movie_model.dart';
 import './movies_remote_DS_test.mocks.dart';
 
 @GenerateMocks([dio.Dio])

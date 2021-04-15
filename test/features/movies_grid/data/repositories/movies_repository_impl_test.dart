@@ -6,7 +6,7 @@ import 'package:movies_gallery/core/error/excpetions.dart';
 import 'package:movies_gallery/core/error/failures.dart';
 import 'package:movies_gallery/core/network/internet_info.dart';
 import 'package:movies_gallery/features/movies_grid/data/data_source/movies_remote_DS.dart';
-import 'package:movies_gallery/features/movies_grid/data/models/movies_model.dart';
+import 'package:movies_gallery/features/movies_grid/data/models/movie_model.dart';
 import 'package:movies_gallery/features/movies_grid/data/repositories/movies_repository_impl.dart';
 import './movies_repository_impl_test.mocks.dart';
 
