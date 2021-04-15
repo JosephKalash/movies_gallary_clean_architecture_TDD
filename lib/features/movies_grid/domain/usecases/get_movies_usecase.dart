@@ -11,7 +11,7 @@ class GetMovies extends Usecase {
   GetMovies(this.movieRepository);
 
   Future<Either<Failure, List<Movie>>> call() async {
-    return await movieRepository.getMovies();
+    return await movieRepository.getPopularityMovies();
   }
 }
 

@@ -14,7 +14,7 @@ class MoviesRepositoryImpl extends MovieRepository {
   MoviesRepositoryImpl(this.remoteDS, this.internetInfo);
 
   @override
-  Future<Either<Failure, List<Movie>>> getMovies() async {
+  Future<Either<Failure, List<Movie>>> getPopularityMovies() async {
     if (await internetInfo.isConnect) {
       try {
         final movies = await remoteDS.fetchPopularityMovies();
@@ -28,7 +28,16 @@ class MoviesRepositoryImpl extends MovieRepository {
   }
 
   @override
-  Future<Either<Failure, Movie>> getMovieDetails(int id) {
-    throw UnimplementedError();
+  Future<Either<Failure, Movie>> getMovieDetails(int id) async{
+    if (await internetInfo.isConnect) {
+      try {
+        final movie = await remoteDS.fetchMovieDetails(id);
+        return Right(movie);
+      } on ServerExcpetion {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(InternetFailure());
+    }
   }
 }

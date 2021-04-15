@@ -20,62 +20,128 @@ void main() {
   );
 
   final tMovies = <MovieModel>[];
-
-  test(
-    'should call isConnect method',
-    () async {
-      //arrange
-      when(mockInternetInfo.isConnect).thenAnswer((_) async => false);
-      //act
-      repositoryImpl.getMovies();
-      //assert
-      verify(mockInternetInfo.isConnect);
-    },
-  );
-  group(
-    'we are online',
-    () {
-      setUp(() {
-        when(mockInternetInfo.isConnect).thenAnswer((_) async => true);
-      });
-      test(
-        'should return list of movieModel when call to server success',
-        () async {
-          //arrange
-          when(mockRemoteDS.fetchPopularityMovies()).thenAnswer((_) async => tMovies);
-          //act
-          final result = await repositoryImpl.getMovies();
-          //assert
-          verify(mockRemoteDS.fetchPopularityMovies());
-          expect(result, equals(Right(tMovies)));
-        },
-      );
-      test(
-        'should return ServerFailure when remoteDS throw an execption',
-        ()async {
-          //arrange
-          when(mockRemoteDS.fetchPopularityMovies()).thenThrow(ServerExcpetion());
-          //act
-          final result = await repositoryImpl.getMovies();
-          //assert
-          expect(result, Left(ServerFailure()));
-        },
-      );
-    },
-  );
-  group(
-    'we are offline',
-    () {
-      test(
-        'should return InternetError when we are offline',
-        () async {
-          when(mockInternetInfo.isConnect).thenAnswer((_) async => false);
-          //act
-          final result = await repositoryImpl.getMovies();
-          //assert
-          expect(result, Left(InternetFailure()));
-        },
-      );
-    },
-  );
+  final tMovieDetail = MovieModel(1, 'title', 'overview', 2.2, 'posterUrl', DateTime(1), []);
+  final tNumber = 1;
+  group('getPopularityMovies', () {
+    group(
+      'we are online',
+      () {
+        setUp(() {
+          when(mockInternetInfo.isConnect).thenAnswer((_) async => true);
+        });
+        test(
+          'should call isConnect method',
+          () async {
+            //arrange
+            when(mockInternetInfo.isConnect).thenAnswer((_) async => false);
+            //act
+            repositoryImpl.getPopularityMovies();
+            //assert
+            verify(mockInternetInfo.isConnect);
+          },
+        );
+        test(
+          'should return list of movieModel when call to server success',
+          () async {
+            //arrange
+            when(mockRemoteDS.fetchPopularityMovies())
+                .thenAnswer((_) async => tMovies);
+            //act
+            final result = await repositoryImpl.getPopularityMovies();
+            //assert
+            verify(mockRemoteDS.fetchPopularityMovies());
+            expect(result, equals(Right(tMovies)));
+          },
+        );
+        test(
+          'should return ServerFailure when remoteDS throw an execption',
+          () async {
+            //arrange
+            when(mockRemoteDS.fetchPopularityMovies())
+                .thenThrow(ServerExcpetion());
+            //act
+            final result = await repositoryImpl.getPopularityMovies();
+            //assert
+            expect(result, Left(ServerFailure()));
+          },
+        );
+      },
+    );
+    group(
+      'we are offline',
+      () {
+        test(
+          'should return InternetError when we are offline',
+          () async {
+            when(mockInternetInfo.isConnect).thenAnswer((_) async => false);
+            //act
+            final result = await repositoryImpl.getPopularityMovies();
+            //assert
+            expect(result, Left(InternetFailure()));
+          },
+        );
+      },
+    );
+  });
+  group('getMovieDetails', () {
+    group(
+      'we are online',
+      () {
+        setUp(() {
+          when(mockInternetInfo.isConnect).thenAnswer((_) async => true);
+        });
+        test(
+          'should call isConnect method',
+          () async {
+            //arrange
+            when(mockInternetInfo.isConnect).thenAnswer((_) async => false);
+            //act
+            repositoryImpl.getMovieDetails(tNumber);
+            //assert
+            verify(mockInternetInfo.isConnect);
+          },
+        );
+        test(
+          'should return movieModel when call to server success',
+          () async {
+            //arrange
+            when(mockRemoteDS.fetchMovieDetails(any))
+                .thenAnswer((_) async => tMovieDetail);
+            //act
+            final result = await repositoryImpl.getMovieDetails(tNumber);
+            //assert
+            verify(mockRemoteDS.fetchMovieDetails(tNumber));
+            expect(result, equals(Right(tMovieDetail)));
+          },
+        );
+        test(
+          'should return ServerFailure when remoteDS throw an execption',
+          () async {
+            //arrange
+            when(mockRemoteDS.fetchMovieDetails(any))
+                .thenThrow(ServerExcpetion());
+            //act
+            final result = await repositoryImpl.getMovieDetails(tNumber);
+            //assert
+            expect(result, Left(ServerFailure()));
+          },
+        );
+      },
+    );
+    group(
+      'we are offline',
+      () {
+        test(
+          'should return InternetError when we are offline',
+          () async {
+            when(mockInternetInfo.isConnect).thenAnswer((_) async => false);
+            //act
+            final result = await repositoryImpl.getMovieDetails(tNumber);
+            //assert
+            expect(result, Left(InternetFailure()));
+          },
+        );
+      },
+    );
+  });
 }

@@ -2,43 +2,50 @@
 // in movies_gallery/test/features/movies_grid/data/repositories/movies_repository_impl_test.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i3;
+import 'dart:async' as _i4;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:movies_gallery/core/network/internet_info.dart' as _i2;
+import 'package:movies_gallery/core/network/internet_info.dart' as _i3;
 import 'package:movies_gallery/features/movies_grid/data/data_source/movies_remote_DS.dart'
-    as _i4;
-import 'package:movies_gallery/features/movies_grid/data/models/movie_model.dart'
     as _i5;
+import 'package:movies_gallery/features/movies_grid/data/models/movie_model.dart'
+    as _i2;
 
 // ignore_for_file: comment_references
 // ignore_for_file: unnecessary_parenthesis
 
+class _FakeMovieModel extends _i1.Fake implements _i2.MovieModel {}
+
 /// A class which mocks [InternetInfo].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockInternetInfo extends _i1.Mock implements _i2.InternetInfo {
+class MockInternetInfo extends _i1.Mock implements _i3.InternetInfo {
   MockInternetInfo() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i3.Future<bool> get isConnect =>
+  _i4.Future<bool> get isConnect =>
       (super.noSuchMethod(Invocation.getter(#isConnect),
-          returnValue: Future.value(false)) as _i3.Future<bool>);
+          returnValue: Future.value(false)) as _i4.Future<bool>);
 }
 
 /// A class which mocks [RemoteDS].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockRemoteDS extends _i1.Mock implements _i4.RemoteDS {
+class MockRemoteDS extends _i1.Mock implements _i5.RemoteDS {
   MockRemoteDS() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i3.Future<List<_i5.MovieModel>> fetchPopularityMovies() =>
+  _i4.Future<List<_i2.MovieModel>> fetchPopularityMovies() =>
       (super.noSuchMethod(Invocation.method(#fetchPopularityMovies, []),
-              returnValue: Future.value(<_i5.MovieModel>[]))
-          as _i3.Future<List<_i5.MovieModel>>);
+              returnValue: Future.value(<_i2.MovieModel>[]))
+          as _i4.Future<List<_i2.MovieModel>>);
+  @override
+  _i4.Future<_i2.MovieModel> fetchMovieDetails(int? id) =>
+      (super.noSuchMethod(Invocation.method(#fetchMovieDetails, [id]),
+              returnValue: Future.value(_FakeMovieModel()))
+          as _i4.Future<_i2.MovieModel>);
 }

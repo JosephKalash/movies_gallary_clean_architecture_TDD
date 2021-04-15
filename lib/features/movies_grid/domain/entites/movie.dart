@@ -4,7 +4,7 @@ class Movie extends Equatable {
   final int id;
   final String title;
   final String overview;
-  final double voteAverage;
+  final num voteAverage;
   final DateTime releaseDate;
   final List<String> genres;
 

@@ -20,7 +20,7 @@ class MovieModel extends Movie {
     int id,
     String title,
     String overview,
-    double voteAverage,
+    num voteAverage,
     String? posterUrl,
     DateTime releaseDate,
     List<String> genres, {
@@ -50,7 +50,7 @@ MovieModel _$MovieModelFromJson(Map<String, dynamic> json) {
     json['id'] as int,
     json['title'] as String,
     json['overview'] as String,
-    (json['vote_average'] as num).toDouble(),
+    (json['vote_average'] as num),
     _buildImageUrl(json['poster_path'] as String?),
     DateTime.parse(json['release_date'] as String),
     _getGenresNameById(
@@ -64,7 +64,7 @@ MovieModel _$MovieModelFromJsonWithDetails(Map<String, dynamic> json) {
     json['id'] as int,
     json['title'] as String,
     json['overview'] as String,
-    (json['vote_average'] as num).toDouble(),
+    (json['vote_average'] as num),
     _buildImageUrl(json['poster_path'] as String?),
     DateTime.parse(json['release_date'] as String),
     (json['genres'] as List<Map<String, dynamic>>)

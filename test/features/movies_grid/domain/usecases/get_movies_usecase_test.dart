@@ -18,11 +18,11 @@ void main() {
     'should get List<Movie> when getMovies usecae has been called',
     () async {
       //arrange
-      when(mockRepository.getMovies()).thenAnswer((_) async => Right(movies));
+      when(mockRepository.getPopularityMovies()).thenAnswer((_) async => Right(movies));
       //act
       final result = await usecase();
       //assert
-      verify(mockRepository.getMovies());
+      verify(mockRepository.getPopularityMovies());
       expect(result, Right(movies));
     },
   );

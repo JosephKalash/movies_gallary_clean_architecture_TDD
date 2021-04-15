@@ -6,6 +6,7 @@ import '../models/movie_model.dart';
 
 abstract class RemoteDS {
   Future<List<MovieModel>> fetchPopularityMovies();
+  Future<MovieModel> fetchMovieDetails(int id);
 }
 
 class RemoteDSImpl extends RemoteDS {
@@ -41,5 +42,11 @@ class RemoteDSImpl extends RemoteDS {
     final result = data['results'] as List<dynamic>;
     final movies = result.map((e) => MovieModel.fromJson(e)).toList();
     return movies;
+  }
+
+  @override
+  Future<MovieModel> fetchMovieDetails(int id) {
+    // TODO: implement fetchMovieDetails
+    throw UnimplementedError();
   }
 }
