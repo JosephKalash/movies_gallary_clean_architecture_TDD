@@ -6,12 +6,12 @@ import '../entites/movie.dart';
 import '../repositories/movies_repository.dart';
 
 class GetMovies extends Usecase {
-  final MovieRepository movieRepository;
+  final MovieRepository _movieRepository;
 
-  GetMovies(this.movieRepository);
+  GetMovies(this._movieRepository);
 
   Future<Either<Failure, List<Movie>>> call() async {
-    return await movieRepository.getPopularityMovies();
+    return _movieRepository.getPopularityMovies();
   }
 }
 

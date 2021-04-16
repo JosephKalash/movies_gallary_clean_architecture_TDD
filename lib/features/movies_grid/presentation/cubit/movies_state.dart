@@ -11,15 +11,26 @@ class Initial extends MoviesState {}
 
 class Loading extends MoviesState {}
 
-class Loaded extends MoviesState {
+class LoadedWithMovies extends MoviesState {
   final List<Movie> _movies;
 
-  Loaded(this._movies);
+  LoadedWithMovies(this._movies);
 
   List<Movie> get movies => [..._movies];
 
   @override
   List<Object> get props => [_movies];
+}
+
+class LoadedWithMovieDetails extends MoviesState {
+  final Movie _movie;
+
+  LoadedWithMovieDetails(this._movie);
+
+  Movie get movie => _movie;
+
+  @override
+  List<Object> get props => [_movie];
 }
 
 class Error extends MoviesState {

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:movies_gallery/features/movies_grid/domain/usecases/get_movie_details.dart';
 
 import 'core/network/internet_info.dart';
 import 'features/movies_grid/data/data_source/movies_remote_DS.dart';
@@ -12,10 +13,16 @@ import 'features/movies_grid/presentation/cubit/movies_cubit.dart';
 final gi = GetIt.instance;
 
 void init() {
-  gi.registerFactory(() => MoviesCubit(gi()));
+  gi.registerFactory(() => MoviesCubit(
+        gi(),
+        gi(),
+      ));
 
   gi.registerLazySingleton(
     () => GetMovies(gi()),
+  );
+  gi.registerLazySingleton(
+    () => GetMovieDetails(gi()),
   );
 
   gi.registerLazySingleton<MovieRepository>(
@@ -34,6 +41,4 @@ void init() {
     () => InternetInfoImpl(gi()),
   );
   gi.registerLazySingleton(() => InternetConnectionChecker());
-
-  
 }

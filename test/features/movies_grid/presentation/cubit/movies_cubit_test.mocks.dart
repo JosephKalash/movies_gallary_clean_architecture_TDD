@@ -9,15 +9,14 @@ import 'package:mockito/mockito.dart' as _i1;
 import 'package:movies_gallery/core/error/failures.dart' as _i6;
 import 'package:movies_gallery/features/movies_grid/domain/entites/movie.dart'
     as _i7;
-import 'package:movies_gallery/features/movies_grid/domain/repositories/movies_repository.dart'
-    as _i2;
+import 'package:movies_gallery/features/movies_grid/domain/usecases/get_movie_details.dart'
+    as _i8;
 import 'package:movies_gallery/features/movies_grid/domain/usecases/get_movies_usecase.dart'
     as _i4;
 
 // ignore_for_file: comment_references
 // ignore_for_file: unnecessary_parenthesis
 
-class _FakeMovieRepository extends _i1.Fake implements _i2.MovieRepository {}
 
 class _FakeEither<L, R> extends _i1.Fake implements _i3.Either<L, R> {}
 
@@ -30,13 +29,24 @@ class MockGetMovies extends _i1.Mock implements _i4.GetMovies {
   }
 
   @override
-  _i2.MovieRepository get movieRepository =>
-      (super.noSuchMethod(Invocation.getter(#movieRepository),
-          returnValue: _FakeMovieRepository()) as _i2.MovieRepository);
-  @override
   _i5.Future<_i3.Either<_i6.Failure, List<_i7.Movie>>> call() =>
       (super.noSuchMethod(Invocation.method(#call, []),
               returnValue:
                   Future.value(_FakeEither<_i6.Failure, List<_i7.Movie>>()))
           as _i5.Future<_i3.Either<_i6.Failure, List<_i7.Movie>>>);
+}
+
+/// A class which mocks [GetMovieDetails].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockGetMovieDetails extends _i1.Mock implements _i8.GetMovieDetails {
+  MockGetMovieDetails() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i5.Future<_i3.Either<_i6.Failure, _i7.Movie>> call(int? id) =>
+      (super.noSuchMethod(Invocation.method(#call, [id]),
+              returnValue: Future.value(_FakeEither<_i6.Failure, _i7.Movie>()))
+          as _i5.Future<_i3.Either<_i6.Failure, _i7.Movie>>);
 }

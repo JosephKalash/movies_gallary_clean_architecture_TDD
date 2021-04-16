@@ -25,7 +25,7 @@ class MoviesGrid extends StatelessWidget {
   List<Movie> _getMoviesInfo(BuildContext context) {
     final cubit = BlocProvider.of<MoviesCubit>(context, listen: false);
     final state = cubit.state;
-    if (state is Loaded) return state.movies;
+    if (state is LoadedWithMovies) return state.movies;
     return [];
   }
 }
