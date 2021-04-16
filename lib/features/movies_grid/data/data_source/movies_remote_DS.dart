@@ -9,18 +9,18 @@ abstract class RemoteDS {
   Future<MovieModel> fetchMovieDetails(int id);
 }
 
+const MOVIE_DISCOVER_URL = 'http://api.themoviedb.org/3/discover/movie';
+const MOVIE_URL = 'https://api.themoviedb.org/3/movie/';
+
 class RemoteDSImpl extends RemoteDS {
   final Dio dio;
 
   RemoteDSImpl(this.dio);
 
-  final url = 'http://api.themoviedb.org/3/discover/movie';
-//https://api.themoviedb.org/3/movie/$id?api_key=$API_KEY&append_to_response=images
-
   @override
   Future<List<MovieModel>> fetchPopularityMovies() async {
     final response = await dio.get(
-      url,
+      MOVIE_DISCOVER_URL,
       queryParameters: {
         'api_key': API_KEY,
         'page': 1,
@@ -44,9 +44,28 @@ class RemoteDSImpl extends RemoteDS {
     return movies;
   }
 
+  MovieModel _returnMovieDetailsFromResponse(Response<dynamic> response) {
+    final data = response.data as Map<String, dynamic>;
+    final movie = MovieModel.fromJsonWithDetails(data);
+    return movie;
+  }
+
   @override
-  Future<MovieModel> fetchMovieDetails(int id) {
-    // TODO: implement fetchMovieDetails
-    throw UnimplementedError();
+  Future<MovieModel> fetchMovieDetails(int id) async {
+    //$id?api_key=$API_KEY&append_to_response=images, credits
+    final url = '$MOVIE_URL$id';
+    final response = await dio.get(
+      url,
+      queryParameters: {
+        'api_key': API_KEY,
+        'append_to_response': 'images,credits',
+      },
+    );
+    if (response.statusCode == 200) {
+      final movie = _returnMovieDetailsFromResponse(response);
+      return movie;
+    } else {
+      throw ServerExcpetion();
+    }
   }
 }
