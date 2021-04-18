@@ -1,6 +1,7 @@
 const API_KEY = '21872c242da463442feafca8036b88d8';
 
-const IMAGE_API = 'https://image.tmdb.org/t/p/w200/';
+const IMAGE_400_API = 'https://image.tmdb.org/t/p/w342/';
+const IMAGE_780_API = 'https://image.tmdb.org/t/p/w780/';
 
 const POSTER_TAG_HERO = 'poster';
 

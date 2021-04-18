@@ -51,7 +51,7 @@ MovieModel _$MovieModelFromJson(Map<String, dynamic> json) {
     json['title'] as String,
     json['overview'] as String,
     (json['vote_average'] as num),
-    _buildImageUrl(json['poster_path'] as String?),
+    _buildImage400Url(json['poster_path'] as String?),
     DateTime.parse(json['release_date'] as String),
     _getGenresNameById(
       (json['genre_ids'] as List<dynamic>).map((e) => e as int).toList(),
@@ -65,7 +65,7 @@ MovieModel _$MovieModelFromJsonWithDetails(Map<String, dynamic> json) {
     json['title'] as String,
     json['overview'] as String,
     (json['vote_average'] as num),
-    _buildImageUrl(json['poster_path'] as String?),
+    _buildImage400Url(json['poster_path'] as String?),
     DateTime.parse(json['release_date'] as String),
     (json['genres'] as List<dynamic>)
         .map((e) => (e as Map<String, dynamic>)['name'] as String)
@@ -86,7 +86,7 @@ List<String> _getImagesUrlFromJson(List<dynamic> json) {
   List<String> urls = [];
   var count = 0;
   for (var image in json) {
-    urls.add(_buildImageUrl(image['file_path'] as String?)!);
+    urls.add(_buildImage700Url(image['file_path'] as String?)!);
     count++;
     if (count >= 4) break;
   }
@@ -116,9 +116,13 @@ List<ActorModel> _getActorsFromJson(List<dynamic> json) {
   return actors;
 }
 
-String? _buildImageUrl(String? path) {
+String? _buildImage400Url(String? path) {
   if (path == null) return null;
-  return '$IMAGE_API$path';
+  return '$IMAGE_400_API$path';
+}
+String? _buildImage700Url(String? path) {
+  if (path == null) return null;
+  return '$IMAGE_780_API$path';
 }
 
 List<String> _getGenresNameById(List<int> ids) {
@@ -137,7 +141,7 @@ ActorModel _$ActorModelFromJson(Map<String, dynamic> json) {
   return ActorModel(
     json['name'] as String,
     json['character'] as String,
-    _buildImageUrl(json['profile_path'] as String?),
+    _buildImage400Url(json['profile_path'] as String?),
   );
 }
 
