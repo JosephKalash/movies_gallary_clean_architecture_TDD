@@ -2,8 +2,7 @@ const API_KEY = '21872c242da463442feafca8036b88d8';
 
 const IMAGE_API = 'https://image.tmdb.org/t/p/w200/';
 
-const castUrl =
-    'https://api.themoviedb.org/3/movie/{movie_id}/credits?api_key=f&language=en-US';
+const POSTER_TAG_HERO = 'poster';
 
 const GENRES = [
   {"id": 28, "name": "Action"},

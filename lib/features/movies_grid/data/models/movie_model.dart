@@ -67,22 +67,22 @@ MovieModel _$MovieModelFromJsonWithDetails(Map<String, dynamic> json) {
     (json['vote_average'] as num),
     _buildImageUrl(json['poster_path'] as String?),
     DateTime.parse(json['release_date'] as String),
-    (json['genres'] as List<Map<String, dynamic>>)
-        .map((e) => e['name'] as String)
+    (json['genres'] as List<dynamic>)
+        .map((e) => (e as Map<String, dynamic>)['name'] as String)
         .toList(),
     runTime: json['runtime'] as int?,
     budget: json['budget'] as int?,
     revenue: json['revenue'] as int?,
     actors: _getActorsFromJson(
-        json['credits']['cast'] as List<Map<String, dynamic>>),
+        json['credits']['cast'] as List<dynamic>),
     director: _getDirectorFromJson(
-        json['credits']['crew'] as List<Map<String, dynamic>>),
+        json['credits']['crew'] as List<dynamic>),
     gallaryImagesUrl: _getImagesUrlFromJson(
-        json['images']['backdrops'] as List<Map<String, dynamic>>),
+        json['images']['backdrops'] as List<dynamic>),
   );
 }
 
-List<String> _getImagesUrlFromJson(List<Map<String, dynamic>> json) {
+List<String> _getImagesUrlFromJson(List<dynamic> json) {
   List<String> urls = [];
   var count = 0;
   for (var image in json) {
@@ -93,7 +93,7 @@ List<String> _getImagesUrlFromJson(List<Map<String, dynamic>> json) {
   return urls;
 }
 
-String _getDirectorFromJson(List<Map<String, dynamic>> json) {
+String _getDirectorFromJson(List<dynamic> json) {
   String name = '';
 
   for (var personJson in json)
@@ -104,12 +104,12 @@ String _getDirectorFromJson(List<Map<String, dynamic>> json) {
   return name;
 }
 
-List<ActorModel> _getActorsFromJson(List<Map<String, dynamic>> json) {
+List<ActorModel> _getActorsFromJson(List<dynamic> json) {
   List<ActorModel> actors = [];
   var count = 0;
 
   for (var actorJson in json) {
-    actors.add(ActorModel.fromJson(actorJson));
+    actors.add(ActorModel.fromJson((actorJson as Map<String, dynamic>)));
     count++;
     if (count >= 10) break;
   }

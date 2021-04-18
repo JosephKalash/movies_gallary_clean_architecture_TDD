@@ -16,20 +16,6 @@ class Movie extends Equatable {
   final int? revenue;
   final String? director;
 
-
-  set budget(int? budget) => this.budget = budget;
-
-  set runTime(int? runTime) => this.runTime = runTime;
-
-  set revenue(int? revenue) => this.revenue = revenue;
-
-  set actors(List<Actor>? actors) => this.actors = actors;
-
-  set director(String? director) => this.director = director;
-
-  set gallaryImagesUrl(List<String>? gallaryImagesUrl) =>
-      this.gallaryImagesUrl = gallaryImagesUrl;
-
   Movie(
     this.id,
     this.title,

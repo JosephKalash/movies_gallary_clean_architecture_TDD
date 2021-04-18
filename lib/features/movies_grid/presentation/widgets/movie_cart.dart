@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../domain/entites/movie.dart';
+import '../pages/movie_details_screen.dart';
 
 class MovieCart extends StatelessWidget {
   final Movie movie;
@@ -28,9 +29,23 @@ class MovieCart extends StatelessWidget {
               ],
             ),
           ),
-          child: Image.network(
-            movie.posterUrl!,
-            errorBuilder: (_, _a, _b) => Text('There is no poster'),
+          child: GestureDetector(
+            onTap: () {
+              Navigator.of(context).pushNamed(
+                MovieDetailScreen.NAME,
+                arguments: {
+                  'name': movie.title,
+                  'id': movie.id,
+                },
+              );
+            },
+            child: Hero(
+              tag: movie.id,
+              child: Image.network(
+                movie.posterUrl!,
+                errorBuilder: (_, _a, _b) => Text('There is no poster'),
+              ),
+            ),
           ),
           footer: ClipRRect(
             borderRadius: BorderRadius.circular(10),

@@ -12,6 +12,7 @@ class MoviesGrid extends StatelessWidget {
 
     return GridView.builder(
       padding: EdgeInsets.all(10),
+      itemCount: movies.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         mainAxisSpacing: 36,
