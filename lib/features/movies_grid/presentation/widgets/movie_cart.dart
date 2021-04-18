@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_gallery/core/utls/func.dart';
 
 import '../../domain/entites/movie.dart';
 import '../pages/movie_details_screen.dart';
@@ -39,13 +40,12 @@ class MovieCart extends StatelessWidget {
                 },
               );
             },
-            child: Hero(
-              tag: movie.id,
-              child: Image.network(
-                movie.posterUrl!,
-                errorBuilder: (_, _a, _b) => Text('There is no poster'),
-              ),
-            ),
+            child: movie.posterUrl!.isEmpty
+                ? Text('There is no poster')
+                : Image.network(
+                    movie.posterUrl!,
+                    errorBuilder: (_, _a, _b) => Text('There is no poster'),
+                  ),
           ),
           footer: ClipRRect(
             borderRadius: BorderRadius.circular(10),
@@ -59,7 +59,7 @@ class MovieCart extends StatelessWidget {
                 ),
               ),
               subtitle: Text(
-                '${movie.genres[0]} | ${movie.genres[1]}',
+                '${formateGenres(movie.genres)}',
               ),
             ),
           ),

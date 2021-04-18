@@ -1,4 +1,4 @@
-import 'package:movies_gallery/core/constans.dart';
+import 'package:movies_gallery/core/utls/constans.dart';
 
 import '../../domain/entites/movie.dart';
 
@@ -73,12 +73,10 @@ MovieModel _$MovieModelFromJsonWithDetails(Map<String, dynamic> json) {
     runTime: json['runtime'] as int?,
     budget: json['budget'] as int?,
     revenue: json['revenue'] as int?,
-    actors: _getActorsFromJson(
-        json['credits']['cast'] as List<dynamic>),
-    director: _getDirectorFromJson(
-        json['credits']['crew'] as List<dynamic>),
-    gallaryImagesUrl: _getImagesUrlFromJson(
-        json['images']['backdrops'] as List<dynamic>),
+    actors: _getActorsFromJson(json['credits']['cast'] as List<dynamic>),
+    director: _getDirectorFromJson(json['credits']['crew'] as List<dynamic>),
+    gallaryImagesUrl:
+        _getImagesUrlFromJson(json['images']['backdrops'] as List<dynamic>),
   );
 }
 
@@ -120,6 +118,7 @@ String? _buildImage400Url(String? path) {
   if (path == null) return null;
   return '$IMAGE_400_API$path';
 }
+
 String? _buildImage700Url(String? path) {
   if (path == null) return null;
   return '$IMAGE_780_API$path';

@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-import '../../../../core/constans.dart';
+import '../../../../core/utls/constans.dart';
 import '../../../../core/error/excpetions.dart';
 import '../models/movie_model.dart';
 

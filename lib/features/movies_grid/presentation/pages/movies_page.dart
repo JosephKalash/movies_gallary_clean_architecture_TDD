@@ -40,15 +40,16 @@ class _MoviesScreenState extends State<MoviesScreen> {
 
   BlocBuilder<MoviesCubit, MoviesState> _buildBlocBuilder() {
     return BlocBuilder<MoviesCubit, MoviesState>(
-      builder: (context, state) {
+      builder: (_, state) {
         if (state is LoadedWithMovies)
           return MoviesGrid();
         else if (state is Loading)
           return _buildProgressIndicator();
         else if (state is Error)
           return _buildText(state.message);
-        else
-          return _buildText('Try Later');
+        else {
+          return _buildText('Try Later...');
+        }
       },
     );
   }

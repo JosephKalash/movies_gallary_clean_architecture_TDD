@@ -25,30 +25,38 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
   }
 
   void _fetchData() {
-    final arguments = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final arguments =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     _movieName = arguments['name'];
-    
-    final cubit = BlocProvider.of<MoviesCubit>(context,listen: false);
+
+    final cubit = BlocProvider.of<MoviesCubit>(context, listen: false);
     cubit.getMovieWithDetails(arguments['id']);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('$_movieName'),
-      ),
-      body: BlocBuilder<MoviesCubit, MoviesState>(
-        builder: (_, state) {
-          if (state is LoadedWithMovieDetails)
-            return MovieBoard();
-          else if (state is Loading)
-            return _buildProgressIndicator();
-          else if (state is Error)
-            return _buildText(state.message);
-          else
-            return _buildText('Try later');
-        },
+    return WillPopScope(
+      onWillPop: () async{
+        final cubit = BlocProvider.of<MoviesCubit>(context, listen: false);
+        cubit.getMoviesList();
+        return true;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('$_movieName'),
+        ),
+        body: BlocBuilder<MoviesCubit, MoviesState>(
+          builder: (_, state) {
+            if (state is LoadedWithMovieDetails)
+              return MovieBoard();
+            else if (state is Loading)
+              return _buildProgressIndicator();
+            else if (state is Error)
+              return _buildText(state.message);
+            else
+              return _buildText('Try later');
+          },
+        ),
       ),
     );
   }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:money_formatter/money_formatter.dart';
+import 'package:movies_gallery/core/utls/func.dart';
 import '../../domain/entites/movie.dart';
 import '../cubit/movies_cubit.dart';
 
@@ -10,10 +11,10 @@ class MovieBoard extends StatelessWidget {
   Widget build(BuildContext context) {
     final movie = _getMovieFromProvider(context);
 
-    return Container(
-      child: movie == null
-          ? Text('unknown error occurred')
-          : Column(
+    return movie == null
+        ? Text('unknown error occurred')
+        : SingleChildScrollView(
+            child: Column(
               children: [
                 _buildStack(movie, context),
                 SizedBox(height: 20),
@@ -39,7 +40,7 @@ class MovieBoard extends StatelessWidget {
                 ),
               ],
             ),
-    );
+          );
   }
 
   Widget _buildStack(Movie movie, BuildContext context) {
@@ -58,16 +59,17 @@ class MovieBoard extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.all(18),
               margin: EdgeInsets.all(18),
-              color: Colors.red.shade900.withOpacity(0.3),
+              color: Colors.red.shade900.withOpacity(0.6),
               child: Column(
                 children: [
                   Text(
-                    _formateGenres(movie.genres),
+                    formateGenres(movie.genres),
                     style: TextStyle(fontSize: 18),
                     textAlign: TextAlign.start,
                   ),
                   _buildMovieMainInfo(movie),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         'Budget:',
@@ -101,13 +103,10 @@ class MovieBoard extends StatelessWidget {
   Row _buildMovieMainInfo(Movie movie) {
     return Row(
       children: [
-        Hero(
-          tag: movie.id,
-          child: Container(
-            height: 280,
-            width: 150,
-            child: Image.network(movie.posterUrl!),
-          ),
+        Container(
+          height: 280,
+          width: 150,
+          child: Image.network(movie.posterUrl!),
         ),
         SizedBox(width: 16),
         Column(
@@ -176,12 +175,5 @@ class MovieBoard extends StatelessWidget {
     return null;
   }
 
-  String _formateGenres(List<String> genres) {
-    if (genres.length == 0) return '';
-    var str = genres[0];
-    for (int i = 1; i < genres.length; i++) {
-      str = '$str | ${genres[i]}';
-    }
-    return str;
-  }
+  
 }
