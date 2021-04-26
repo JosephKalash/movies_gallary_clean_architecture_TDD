@@ -27,7 +27,7 @@ void main() {
           when(mockGetMovies()).thenAnswer((_) async => Left(Failure()));
           final expect = [
             Loading(),
-            Error('message'),
+            Error('An error occurred'),
           ];
           expectLater(cubit.stream, emitsInOrder(expect));
 
@@ -65,7 +65,7 @@ void main() {
           when(mockGetMovieDetails(any))
               .thenAnswer((_) async => Left(ServerFailure()));
           //assert
-          final expected = [Loading(), Error('error')];
+          final expected = [Loading(), Error('An error occurred')];
           expectLater(cubit.stream, emitsInOrder(expected));
           //act
           cubit.getMovieWithDetails(tId);

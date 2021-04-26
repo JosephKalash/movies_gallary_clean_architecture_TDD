@@ -52,7 +52,6 @@ class RemoteDSImpl extends RemoteDS {
 
   @override
   Future<MovieModel> fetchMovieDetails(int id) async {
-    //$id?api_key=$API_KEY&append_to_response=images, credits
     final url = '$MOVIE_URL$id';
     final response = await dio.get(
       url,

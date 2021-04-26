@@ -18,29 +18,77 @@ class MovieBoard extends StatelessWidget {
               children: [
                 _buildStack(movie, context),
                 SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 20, vertical: 12.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'OVERVIEW:',
-                        style: _buildTextStyleInfoTitle(),
-                        textAlign: TextAlign.left,
-                      ),
-                      SizedBox(height: 10),
-                      Text(
-                        '${movie.overview}',
-                        style: TextStyle(fontSize: 16),
-                        textAlign: TextAlign.left,
-                      ),
-                    ],
-                  ),
-                ),
+                _buildOverview(movie),
+                SizedBox(height: 20),
+                _buildActors(context, movie),
+                SizedBox(height: 50),
               ],
             ),
           );
+  }
+
+  Container _buildActors(BuildContext context, Movie movie) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: 260,
+      color: Colors.grey.shade900.withOpacity(0.8),
+      padding: EdgeInsets.all(16),
+      child: GridView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: movie.actors!.length,
+        itemBuilder: (_, i) {
+          return GridTile(
+            child: Image.network(
+              movie.actors![i].imageUrl != null
+                  ? movie.actors![i].imageUrl!
+                  : 'https://www.freeiconspng.com/uploads/person-icon-8.png',
+              fit: BoxFit.cover,
+            ),
+            footer: SizedBox(
+              height: 50,
+              child: GridTileBar(
+                backgroundColor: Colors.greenAccent.shade700.withOpacity(0.85),
+                title: Text(
+                  '${movie.actors?[i].name}',
+                  style: TextStyle(fontSize: 16),
+                ),
+                subtitle: Text("${movie.actors?[i].characterName}"),
+              ),
+            ),
+          );
+        },
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 1,
+          mainAxisSpacing: 22,
+          childAspectRatio: 3 / 2,
+        ),
+      ),
+    );
+  }
+
+  Padding _buildOverview(Movie movie) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 20,
+        vertical: 12.0,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'OVERVIEW:',
+            style: _buildTextStyleInfoTitle(),
+            textAlign: TextAlign.left,
+          ),
+          SizedBox(height: 10),
+          Text(
+            '${movie.overview}',
+            style: TextStyle(fontSize: 16),
+            textAlign: TextAlign.left,
+          ),
+        ],
+      ),
+    );
   }
 
   Widget _buildStack(Movie movie, BuildContext context) {
@@ -59,7 +107,7 @@ class MovieBoard extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.all(18),
               margin: EdgeInsets.all(18),
-              color: Colors.red.shade900.withOpacity(0.6),
+              color: Colors.grey.shade900.withOpacity(0.7),
               child: Column(
                 children: [
                   Text(
@@ -68,29 +116,7 @@ class MovieBoard extends StatelessWidget {
                     textAlign: TextAlign.start,
                   ),
                   _buildMovieMainInfo(movie),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Budget:',
-                        style: _buildTextStyleInfoTitle(),
-                      ),
-                      Text(
-                        '${MoneyFormatter(amount: movie.budget!.toDouble()).output.compactSymbolOnLeft}',
-                        style: _buildTextStyleInfo(),
-                      ),
-                      SizedBox(width: 14),
-                      Text(
-                        'revenue:',
-                        style: _buildTextStyleInfoTitle(),
-                      ),
-                      Text(
-                        '${MoneyFormatter(amount: movie.revenue!.toDouble()).output.compactSymbolOnLeft}',
-                        style: _buildTextStyleInfo(),
-                      ),
-                      SizedBox(width: 14),
-                    ],
-                  )
+                  _buildMovieMoenyInfo(movie)
                 ],
               ),
             ),
@@ -100,11 +126,37 @@ class MovieBoard extends StatelessWidget {
     );
   }
 
+  Row _buildMovieMoenyInfo(Movie movie) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          'Budget:',
+          style: _buildTextStyleInfoTitle(),
+        ),
+        Text(
+          '${MoneyFormatter(amount: movie.budget!.toDouble()).output.compactSymbolOnLeft}',
+          style: _buildTextStyleInfo(),
+        ),
+        SizedBox(width: 14),
+        Text(
+          'revenue:',
+          style: _buildTextStyleInfoTitle(),
+        ),
+        Text(
+          '${MoneyFormatter(amount: movie.revenue!.toDouble()).output.compactSymbolOnLeft}',
+          style: _buildTextStyleInfo(),
+        ),
+        SizedBox(width: 14),
+      ],
+    );
+  }
+
   Row _buildMovieMainInfo(Movie movie) {
     return Row(
       children: [
         Container(
-          height: 280,
+          height: 260,
           width: 150,
           child: Image.network(movie.posterUrl!),
         ),
@@ -174,6 +226,4 @@ class MovieBoard extends StatelessWidget {
     if (state is LoadedWithMovieDetails) return state.movie;
     return null;
   }
-
-  
 }

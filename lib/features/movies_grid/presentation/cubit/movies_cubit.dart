@@ -21,7 +21,7 @@ class MoviesCubit extends Cubit<MoviesState> {
 
     final either = await _getMovies();
     either.fold(
-      (_) async => emit(Error('message')),
+      (_) async => emit(Error('An error occurred')),
       (movies) async => emit(LoadedWithMovies(movies)),
     );
   }
@@ -31,7 +31,7 @@ class MoviesCubit extends Cubit<MoviesState> {
 
     final either = await _getMovieDetails(id);
     either.fold(
-      (_) async => emit(Error('error')),
+      (_) async => emit(Error('An error occurred')),
       (movie)async => emit(LoadedWithMovieDetails(movie)),
     );
   }
