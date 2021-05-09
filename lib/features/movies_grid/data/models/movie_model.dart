@@ -1,4 +1,4 @@
-import 'package:movies_gallery/core/utls/constans.dart';
+import 'package:movies_gallery/core/utils/constans.dart';
 
 import '../../domain/entites/movie.dart';
 

@@ -4,7 +4,7 @@ import 'package:movies_gallery/features/movies_grid/presentation/pages/movie_det
 
 import 'features/movies_grid/presentation/cubit/movies_cubit.dart';
 import 'features/movies_grid/presentation/pages/movies_page.dart';
-import 'get_it.dart' as gI_dir;
+import 'injection.dart' as gI_dir;
 
 void main() {
   gI_dir.init();

@@ -2,7 +2,7 @@ import 'package:dio/dio.dart' as dio;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:movies_gallery/core/utls/constans.dart';
+import 'package:movies_gallery/core/utils/constans.dart';
 import 'package:movies_gallery/core/error/excpetions.dart';
 import 'package:movies_gallery/features/movies_grid/data/data_source/movies_remote_DS.dart';
 import 'package:movies_gallery/features/movies_grid/data/models/movie_model.dart';

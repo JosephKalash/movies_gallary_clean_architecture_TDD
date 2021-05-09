@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-import '../../../../core/utls/constans.dart';
+import '../../../../core/utils/constans.dart';
 import '../../../../core/error/excpetions.dart';
 import '../models/movie_model.dart';
 
@@ -13,6 +13,7 @@ const MOVIE_DISCOVER_URL = 'http://api.themoviedb.org/3/discover/movie';
 const MOVIE_URL = 'https://api.themoviedb.org/3/movie/';
 
 class RemoteDSImpl extends RemoteDS {
+  static int _pageNum = 1;
   final Dio dio;
 
   RemoteDSImpl(this.dio);
@@ -23,7 +24,7 @@ class RemoteDSImpl extends RemoteDS {
       MOVIE_DISCOVER_URL,
       queryParameters: {
         'api_key': API_KEY,
-        'page': 1,
+        'page': _pageNum,
         'language': 'en-US',
         'include_adult': false,
         'include_video': false,

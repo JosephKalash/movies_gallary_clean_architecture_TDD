@@ -9,7 +9,7 @@ void main() {
     'name',
     'overview',
     23.3,
-    'https://image.tmdb.org/t/p/w200/posterUrl',
+    'https://image.tmdb.org/t/p/w342/posterUrl',
     date,
     ['Action', 'Crime'],
   );
@@ -18,15 +18,15 @@ final tMovieDetails = MovieModel(
     'name',
     'overview',
     23.3,
-    'https://image.tmdb.org/t/p/w200/posterUrl',
+    'https://image.tmdb.org/t/p/w342/posterUrl',
     date,
     ['Action'],
     runTime: 1,
-    actors: [ActorModel('name', 'characterName', 'https://image.tmdb.org/t/p/w200/imageUrl')],
+    actors: [ActorModel('name', 'characterName', 'https://image.tmdb.org/t/p/w342/imageUrl')],
     budget: 1,
     revenue: 1,
     director: 'joseph',
-    gallaryImagesUrl: ['https://image.tmdb.org/t/p/w200/image'],
+    gallaryImagesUrl: ['https://image.tmdb.org/t/p/w780/image'],
   );
 
   final tMovieJson = {

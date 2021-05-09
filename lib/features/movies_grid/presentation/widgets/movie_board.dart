@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:money_formatter/money_formatter.dart';
-import 'package:movies_gallery/core/utls/func.dart';
+import 'package:movies_gallery/core/utils/funcs.dart';
 import '../../domain/entites/movie.dart';
 import '../cubit/movies_cubit.dart';
 
@@ -27,42 +27,56 @@ class MovieBoard extends StatelessWidget {
           );
   }
 
-  Container _buildActors(BuildContext context, Movie movie) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: 260,
-      color: Colors.grey.shade900.withOpacity(0.8),
-      padding: EdgeInsets.all(16),
-      child: GridView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: movie.actors!.length,
-        itemBuilder: (_, i) {
-          return GridTile(
-            child: Image.network(
-              movie.actors![i].imageUrl != null
-                  ? movie.actors![i].imageUrl!
-                  : 'https://www.freeiconspng.com/uploads/person-icon-8.png',
-              fit: BoxFit.cover,
-            ),
-            footer: SizedBox(
-              height: 50,
-              child: GridTileBar(
-                backgroundColor: Colors.greenAccent.shade700.withOpacity(0.85),
-                title: Text(
-                  '${movie.actors?[i].name}',
-                  style: TextStyle(fontSize: 16),
-                ),
-                subtitle: Text("${movie.actors?[i].characterName}"),
-              ),
-            ),
-          );
-        },
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 1,
-          mainAxisSpacing: 22,
-          childAspectRatio: 3 / 2,
+  Widget _buildActors(BuildContext context, Movie movie) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 20.0),
+          child: Text(
+            'Actors:',
+            style: _buildTextStyleInfoTitle(),
+          ),
         ),
-      ),
+        SizedBox(height: 12),
+        Container(
+          width: MediaQuery.of(context).size.width,
+          height: 260,
+          color: Colors.grey.shade900.withOpacity(0.8),
+          padding: EdgeInsets.all(16),
+          child: GridView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: movie.actors!.length,
+            itemBuilder: (_, i) {
+              return GridTile(
+                child: Image.network(
+                  movie.actors![i].imageUrl != null
+                      ? movie.actors![i].imageUrl!
+                      : 'https://www.freeiconspng.com/uploads/person-icon-8.png',
+                  fit: BoxFit.cover,
+                ),
+                footer: SizedBox(
+                  height: 50,
+                  child: GridTileBar(
+                    backgroundColor:
+                        Colors.greenAccent.shade700.withOpacity(0.85),
+                    title: Text(
+                      '${movie.actors?[i].name}',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    subtitle: Text("${movie.actors?[i].characterName}"),
+                  ),
+                ),
+              );
+            },
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 1,
+              mainAxisSpacing: 22,
+              childAspectRatio: 3 / 2,
+            ),
+          ),
+        ),
+      ],
     );
   }
 
